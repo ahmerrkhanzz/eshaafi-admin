@@ -1,0 +1,158 @@
+<div class="loading" *ngIf="loading">
+  <span class="text-grey">Updating please wait...</span>
+  <img src="../../../../assets/images/loader.gif" alt="" />
+</div>
+<div class="doctor">
+  <div class="doctor-heading">
+    <h3>Doctor's Information</h3>
+  </div>
+  <ul ngbNav #nav="ngbNav" (navChange)="onNavChange($event)" class="nav-tabs">
+    <li [ngbNavItem]="tab.id" *ngFor="let tab of doctors" [disabled]="true">
+      <a ngbNavLink (click)="selectTab(tab)">{{ tab.title }}</a>
+      <ng-template ngbNavContent>
+        <app-personal-information
+          [savedForm]="savedForm"
+          (proceed)="validated($event)"
+          (unauthorized)="isUserLoggedIn($event)"
+          *ngIf="selectedTab.id === 1"
+        ></app-personal-information>
+        <app-education
+          *ngIf="selectedTab.id === 2"
+          (proceed)="validated($event)"
+        ></app-education>
+        <app-experience
+          *ngIf="selectedTab.id === 3"
+          (proceed)="validated($event)"
+        ></app-experience>
+        <app-awards
+          *ngIf="selectedTab.id === 4"
+          (proceed)="validated($event)"
+        ></app-awards>
+        <!-- <app-hospital
+          (proceed)="validated($event)"
+          *ngIf="selectedTab.id === 5"
+        ></app-hospital> -->
+        <app-video-consultation
+          (proceed)="validated($event)"
+          *ngIf="selectedTab.id === 5"
+        ></app-video-consultation>
+        <app-services
+          *ngIf="selectedTab.id === 6"
+          (proceed)="validated($event)"
+        ></app-services>
+        <app-faqs
+          *ngIf="selectedTab.id === 7"
+          (proceed)="validated($event)"
+        ></app-faqs>
+      </ng-template>
+    </li>
+  </ul>
+  <div class="card mt-4">
+    <div class="card-header">
+      <div class="card-title">
+        <h3 class="card-label">
+          {{ selectedTab.title }}
+          <i class="mr-2"></i>
+        </h3>
+      </div>
+      <div class="card-toolbar">
+        <!-- <a href="javascript:;" class="btn btn-light-primary mr-2">
+          <svg
+            enable-background="new 0 0 32 32"
+            height="24px"
+            id="Слой_1"
+            version="1.1"
+            viewBox="0 0 32 32"
+            width="24px"
+            xml:space="preserve"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <style>
+              .st0 {
+                fill: #00b8ae;
+                transition: all 0.5s ease;
+              }
+            </style>
+            <path
+              class="st0"
+              clip-rule="evenodd"
+              d="M31.106,15H3.278l8.325-8.293  c0.391-0.391,0.391-1.024,0-1.414c-0.391-0.391-1.024-0.391-1.414,0l-9.9,9.899c-0.385,0.385-0.385,1.029,0,1.414l9.9,9.9  c0.391,0.391,1.024,0.391,1.414,0c0.391-0.391,0.391-1.024,0-1.414L3.278,17h27.828c0.552,0,1-0.448,1-1  C32.106,15.448,31.658,15,31.106,15z"
+              fill-rule="evenodd"
+              id="Arrow_Back"
+            />
+            <g />
+            <g />
+            <g />
+            <g />
+            <g />
+            <g />
+          </svg>
+          Back</a
+        > -->
+        <!-- <div class="btn-group">
+          <button type="button" class="btn btn-primary font-weight-bolder">
+            <svg
+              fill="none"
+              height="24"
+              stroke="#fff"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              viewBox="0 0 24 24"
+              width="24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M22 11.07V12a10 10 0 1 1-5.93-9.14" />
+              <polyline points="23 3 12 14 9 11" />
+            </svg>
+            Save Form
+          </button>
+        </div> -->
+      </div>
+    </div>
+    <div class="card-body">
+      <form>
+        <div class="row">
+          <div class="col-xl-2"></div>
+          <div class="col-xl-8">
+            <!-- <app-personal-information></app-personal-information> -->
+            <div [ngbNavOutlet]="nav"></div>
+            <!-- <div class="d-flex justify-content-end">
+              <button
+                *ngIf="selectedTab.id > 1"
+                type="button"
+                class="btn btn-lg btn-light-primary mr-2"
+                (click)="
+                  nav.select(selectedTab.id - 1);
+                  controls('back', selectedTab.id)
+                "
+              >
+                Previous
+              </button>
+              <button
+                type="button"
+                *ngIf="selectedTab.id < doctors.length"
+                class="btn btn-lg btn-primary"
+                (click)="
+                  nav.select(selectedTab.id + 1);
+                  controls('next', selectedTab.id)
+                "
+              >
+                Next
+              </button>
+              <button
+                type="button"
+                *ngIf="selectedTab.id === doctors.length"
+                class="btn btn-lg btn-primary"
+              >
+                Submit
+              </button>
+            </div> -->
+          </div>
+          <div class="col-xl-2"></div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

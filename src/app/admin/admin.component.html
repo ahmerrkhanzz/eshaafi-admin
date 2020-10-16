@@ -1,0 +1,34 @@
+<div
+  class="container-fluid h-100"
+  style="
+    background-image: url(../../assets/images/admin-bg.jpg);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-size: 100% 175px;
+  "
+>
+  <div class="row h-100">
+    <div class="col-lg-2 pl-0 isWeb">
+      <app-admin-aside></app-admin-aside>
+    </div>
+    <div class="col-lg-10">
+      <div class="isMobile">
+        <button (click)="show = !show" class="btn btn-light-primary">
+          Menu
+        </button>
+        <ngx-nav-drawer [(open)]="show">
+          <a routerLink="/admin/dashboard">Dashboard</a>
+          <a routerLink="/admin/doctors">View Doctors</a>
+          <a routerLink="/admin/doctors/add-doctor">Add Doctor</a>
+          <a routerLink="/admin/doctors/specialities">Specialities</a>
+          <a routerLink="/admin/doctors/symptoms">Symptoms</a>
+          <a routerLink="/admin/patients">Patients</a>
+          <a routerLink="/admin/patients/add-patient">Add Patient</a>
+          <a routerLink="/admin/appointments">Appointments</a>
+        </ngx-nav-drawer>
+      </div>
+      <app-topnav [page]="'admin'"></app-topnav>
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

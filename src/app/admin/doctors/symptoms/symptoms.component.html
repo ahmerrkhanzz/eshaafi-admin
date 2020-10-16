@@ -1,0 +1,8 @@
+<div class="card">
+    <div class="loading" *ngIf="loading">
+      <span class="text-grey">Fetching data, please wait ...</span>
+      <img src="../../../../assets/images/loader.gif" alt="" />
+    </div>
+    <app-custom-table [tableConstructor]="tableConstructor" (actionEmitter)="actionEmitter($event)" (editEmitter)="editEmitter($event)" (addEmitter)="addEmitter($event)"></app-custom-table>
+  </div>
+  

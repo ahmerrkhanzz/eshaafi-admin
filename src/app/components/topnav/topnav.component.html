@@ -1,0 +1,69 @@
+<div class="topbar">
+  <div class="loading" *ngIf="loading">
+    <img src="../../../assets/images/loader.gif" alt="">
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <!-- <a class="navbar-brand" href="javascript:;" (click)="homePage()"
+            ><img src="../../../assets/images/h_logo.png" alt=""
+          /></a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button> -->
+
+          <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarSupportedContent">
+            <!-- <ul class="navbar-nav mr-auto">
+              <li class="nav-item" *ngFor="let nav of navs">
+                <a
+                  class="nav-link"
+                  href="javascript:;"
+                  (click)="navClick(nav)"
+                  >{{ nav }}</a
+                >
+              </li>
+            </ul> -->
+            <!-- <button type="button" class="btn btn-primary mr-2">
+              <i class="fas fa-user-md mr-1"></i> Join as Doctor
+            </button> -->
+            <div ngbDropdown class="d-flex">
+              <button
+                class="btn btn-light-primary"
+                id="dropdownBasic1"
+                ngbDropdownToggle
+              >
+                Hi, Admin
+                <!-- <img src="" alt=""> -->
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <!-- <button ngbDropdownItem (click)="navigate()">Admin</button> -->
+                <button ngbDropdownItem (click)="logOut()">Logout</button>
+              </div>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <!-- <div class="row home">
+      <div class="col-lg-7 col-md-7 col-sm-12">
+        <app-location-search-box></app-location-search-box>
+      </div>
+      <div
+        class="col-lg-5 col-md-5 col-sm-12 home-call d-flex align-items-center"
+      >
+        <i class="fas fa-phone-alt mr-1"></i>
+        Call : 030 111 66 522
+      </div>
+    </div> -->
+  </div>
+</div>

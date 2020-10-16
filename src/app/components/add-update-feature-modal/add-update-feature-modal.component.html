@@ -1,0 +1,92 @@
+<div class="card speciality">
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/images/loader.gif" alt="" />
+  </div>
+  <div class="card-body">
+    <a href="javascript:;" class="close" (click)="close(null)">
+      <svg
+        enable-background="new 0 0 100 100"
+        id="Layer_1"
+        version="1.1"
+        viewBox="0 0 100 100"
+        xml:space="preserve"
+        xmlns="http://www.w3.org/2000/svg"
+        width="30px"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+      >
+        <polygon
+          fill="#00b8ae"
+          points="77.6,21.1 49.6,49.2 21.5,21.1 19.6,23 47.6,51.1 19.6,79.2 21.5,81.1 49.6,53 77.6,81.1 79.6,79.2   51.5,51.1 79.6,23 "
+        />
+      </svg>
+    </a>
+    <div class="form-container">
+      <div class="form-container-title">
+        <h3>{{ item ? "Update" : "Add" }} {{ title }}</h3>
+      </div>
+      <form>
+        <div class="form-group mb-4 text-center">
+          <div class="image-input image-input-outline">
+            <div
+              class="image-input-wrapper"
+              style="background-image: url({{preview}})"
+            ></div>
+            <label
+              class="btn btn-xs btn-circle"
+              data-action="change"
+              data-toggle="tooltip"
+              title=""
+              data-original-title="Change avatar"
+            >
+              <i class="fa fa-pen icon-sm text-muted"></i>
+              <input
+                type="file"
+                accept=".png, .jpg, .jpeg"
+                (change)="handleFileInput($event)"
+              />
+              <input type="hidden" name="profile_avatar_remove" />
+            </label>
+            <span
+              class="btn btn-xs btn-circle btn-cancel-image"
+              data-action="cancel"
+              data-toggle="tooltip"
+              title=""
+              data-original-title="Cancel avatar"
+              (click)="cancelAvatar()"
+            >
+              <i class="fas fa-times icon-sm text-muted"></i>
+            </span>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <input
+            name="speciality_en"
+            [(ngModel)]="name_en"
+            placeholder="{{title}} Name"
+            type="text"
+            maxlength="25"
+            class="form-control form-control-solid form-control-lg"
+          />
+        </div>
+        <div class="form-group mb-4" *ngIf="title.toLowerCase() === 'symptom'">
+          <input
+            name="speciality_ur"
+            [(ngModel)]="name_ur"
+            placeholder="{{title}} Name Urdu"
+            type="text"
+            maxlength="25"
+            class="form-control form-control-solid form-control-lg"
+          />
+        </div>
+        <button
+          type="button"
+          (click)="addSpeciality()"
+          [disabled]="!name_en && !name_ur"
+          class="btn btn-light-primary mt-4"
+        >
+          {{ item ? "Update" : "Add" }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,140 @@
+@import "../../../assets/scss/_variables.scss";
+
+.navaside {
+  box-shadow: 0 0 28px 0 rgba(82, 63, 105, 0.08);
+  height: 100%;
+  background: #fff;
+  .list-group-item {
+    background: #fff;
+    font-size: 0.8rem;
+    border: none;
+    padding: 0;
+    a {
+      transition: all ease 1s;
+      display: flex;
+      align-items: center;
+      padding: 1rem 1.25rem;
+      color: $text-purple;
+      font-size: 1rem;
+      font-weight: 400;
+      i {
+        color: $text-muted;
+        transition: all ease 1s;
+      }
+      img {
+        width: 1.5rem;
+        margin-right: 0.7rem;
+      }
+      &:hover,
+      &.active {
+        text-decoration: none;
+        background: $wave-grey;
+        color: $color-primary;
+        i {
+          color: $color-primary;
+        }
+      }
+    }
+  }
+  .list-group-collapse {
+    a {
+      padding: 0.5rem 0.5rem 0.5rem 3.4rem;
+      font-size: 0.9rem;
+      img {
+        width: 0.8rem;
+      }
+    }
+  }
+  &-header {
+    // background: $light-grey;
+    color: $text-purple;
+    padding: 1.5rem;
+    img {
+      width: 100%;
+      max-width: 4rem;
+    }
+    h4 {
+      margin: 0;
+    }
+  }
+  ::ng-deep .accordion {
+    .card {
+      &-header {
+        background: none;
+        border: none;
+        padding: 0;
+        button {
+          &:focus {
+            text-decoration: none;
+          }
+          transition: all ease 1s;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          padding: 1rem 1.25rem;
+          color: $color-primary;
+          font-size: 1rem;
+          font-weight: 400;
+          i {
+            color: $text-muted;
+            transition: all ease 1s;
+          }
+          img {
+            width: 1.5rem;
+            margin-right: 0.7rem;
+          }
+          &:hover,
+          &.btn-link {
+            padding: 0;
+            text-decoration: none;
+            background: $wave-grey;
+            color: $color-primary;
+            i {
+              color: $color-primary;
+            }
+            > div {
+              padding: 1.25rem 1rem;
+              text-align: left;
+              width: 100%;
+            }
+          }
+          &.collapsed {
+            text-decoration: none;
+            background: none;
+            padding: 0;
+            color: $text-purple;
+            i {
+              color: $text-purple;
+            }
+            > div {
+              padding: 1.25rem 1rem;
+              text-align: left;
+              width: 100%;
+            }
+          }
+        }
+      }
+      &-body {
+        padding: 0px;
+        min-height: 0;
+        .list-group-collapse a {
+          padding: 0.5rem 0.5rem 0.5rem 3.4rem;
+          font-size: 0.9rem;
+          color: $text-purple;
+          &:hover,
+          &.active {
+            text-decoration: none;
+            background: $wave-grey;
+            color: $color-primary;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .navaside {
+    display: none;
+  }
+}

@@ -1,0 +1,98 @@
+<div class="card login">
+  <div class="loading" *ngIf="loading">
+      <img src="../../../assets/images/loader.gif" alt="" />
+    </div>
+  <div class="card-body">
+    <div class="form-container">
+      <div class="form-container-title">
+        <img src="../../../assets/images/logo.svg" alt="" />
+        <h3>Welcome to Eshaafi Admin</h3>
+        <p>Enter your details to login</p>
+      </div>
+      <form [formGroup]="loginForm">
+        <div class="form-group mb-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">@</div>
+            </div>
+            <input
+              [class.is-invalid]="
+                loginForm.get('email').invalid &&
+                (loginForm.get('email').touched || loginForm.get('email').dirty)
+              "
+              [class.is-valid]="
+                !loginForm.get('email').invalid &&
+                (loginForm.get('email').touched || loginForm.get('email').dirty)
+              "
+              type="text"
+              formControlName="email"
+              placeholder="Enter email"
+              class="form-control form-control-solid form-control-lg"
+            />
+          </div>
+          <div
+            *ngIf="
+              loginFormControls.email.invalid &&
+              (loginFormControls.email.dirty || loginFormControls.email.touched)
+            "
+          >
+            <div
+              *ngIf="loginFormControls.email.errors.required"
+              class="invalid-feedback"
+            >
+              Please provide email
+            </div>
+          </div>
+        </div>
+        <div class="form-group mb-4">
+          <div class="input-group">
+            <div class="input-group-prepend">
+              <div class="input-group-text">#</div>
+            </div>
+            <input
+              [class.is-invalid]="
+                loginForm.get('password').invalid &&
+                (loginForm.get('password').touched ||
+                  loginForm.get('password').dirty)
+              "
+              [class.is-valid]="
+                !loginForm.get('password').invalid &&
+                (loginForm.get('password').touched ||
+                  loginForm.get('password').dirty)
+              "
+              type="password"
+              minlength="6"
+              maxlength="20"
+              formControlName="password"
+              placeholder="Enter password"
+              class="form-control form-control-solid form-control-lg"
+            />
+          </div>
+          <div
+            *ngIf="
+              loginFormControls.password.invalid &&
+              (loginFormControls.password.dirty ||
+                loginFormControls.password.touched)
+            "
+          >
+            <div
+              *ngIf="loginFormControls.password.errors.required"
+              class="invalid-feedback"
+            >
+              Please provide password
+            </div>
+          </div>
+        </div>
+        <button
+          id="sign-in-button"
+          type="submit"
+          class="btn btn-light-primary mt-4"
+          [disabled]="loginForm.invalid"
+          (click)="loginHandler()"
+        >
+          Login
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

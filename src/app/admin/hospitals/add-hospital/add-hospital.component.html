@@ -1,0 +1,36 @@
+<div class="card">
+  <div class="card-header">
+    <h4>Add New Hospital</h4>
+  </div>
+  <div class="card-body">
+    <div class="loading" *ngIf="loading">
+      <img src="../../../../assets/images/loader.gif" alt="">
+    </div>
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+      <li ngbNavItem [ngbNavItem]="nav.id" *ngFor="let nav of navs">
+        <a ngbNavLink (click)="selectTab(nav)">{{ nav.title }}</a>
+        <ng-template ngbNavContent>
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8">
+              <app-general-information
+                (proceed)="validated($event)"
+                *ngIf="selectedTab.id === 1"
+              ></app-general-information>
+              <app-timings
+                *ngIf="selectedTab.id === 2"
+                (proceed)="validated($event)"
+              ></app-timings>
+              <app-services-treatments
+                *ngIf="selectedTab.id === 3"
+                (proceed)="validated($event)"
+              ></app-services-treatments>
+            </div>
+            <div class="col-sm-2"></div>
+          </div>
+        </ng-template>
+      </li>
+    </ul>
+    <div [ngbNavOutlet]="nav"></div>
+  </div>
+</div>

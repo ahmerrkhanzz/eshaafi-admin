@@ -1,0 +1,64 @@
+<div class="navaside">
+  <div class="navaside-header">
+    <img src="../../../assets/images/logo.svg" alt="" />
+  </div>
+  <ngb-accordion #acc="ngbAccordion" [closeOthers]="true" [activeIds]="activeIds">
+    <ngb-panel *ngFor="let list of navList; let i= index" id="panel-{{i}}">
+      <ng-template ngbPanelTitle>
+        <div (click)="tabClick(list)">
+          <!-- <i class="{{ list.icon }} mr-3"></i> -->
+          <img src="../../../assets/icons/{{ list.img }}.svg" alt="" />
+          {{ list.name }}
+        </div>
+      </ng-template>
+      <ng-container *ngIf="list.child">
+        <ng-template ngbPanelContent>
+          <div class="list-group-collapse" *ngFor="let item of list.child">
+            <a
+              href="javascript:;"
+              class="d-flex"
+              (click)="tabChildClick(item)"
+              [ngClass]="{ active: selectedChild == item }"
+            >
+              <img
+                src="../../../assets/icons/bullet_green.svg"
+                alt=""
+                class="mr-3"
+              />
+              {{ item.name }}
+            </a>
+          </div>
+        </ng-template>
+      </ng-container>
+    </ngb-panel>
+  </ngb-accordion>
+
+  <!-- <ul class="list-group">
+    <li class="list-group-item" *ngFor="let list of navList">
+      <a
+        href="javascript:;"
+        (click)="tabClick(list)"
+        [ngClass]="{ active: selectedItem == list }"
+      >
+        <img src="../../../assets/icons/{{ list.img }}.svg" alt="" />
+        {{ list.name }}
+      </a>
+      <div
+        class="list-group-collapse"
+        id="collapseExample"
+        [ngbCollapse]="isCollapsed"
+        *ngFor="let item of list.child"
+      >
+        <a
+          href="javascript:;"
+          class="d-flex"
+          (click)="tabChildClick(item)"
+          [ngClass]="{ active: selectedChild == item }"
+        >
+          <img src="../../../assets/icons/bullet_green.svg" alt="" />
+          {{ item.name }}
+        </a>
+      </div>
+    </li>
+  </ul> -->
+</div>

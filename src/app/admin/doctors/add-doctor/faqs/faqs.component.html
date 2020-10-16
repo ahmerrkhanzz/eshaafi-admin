@@ -1,0 +1,129 @@
+<div class="faqs">
+  <form [formGroup]="faqsForm">
+    <div formArrayName="faqs">
+      <div
+        class="faqs-divider"
+        *ngFor="
+          let control of faqsForm['controls'].faqs['controls'];
+          let idx = index
+        "
+      >
+        <a
+          href="javascript:;"
+          placement="right"
+          ngbTooltip="Remove this section"
+          *ngIf="idx > 0"
+          (click)="removeAnother()"
+        >
+          <img src="../../../../../assets/icons/cross-green.svg" alt="" />
+        </a>
+        <div class="form-group row" formGroupName="{{ idx }}">
+          <label for="" class="col-sm-3 col-form-label">Question <span *ngIf="idx === 0" class="text-danger">*</span></label>
+          <div class="col-sm-9">
+            <input
+            pattern="^\S$|^\S[\s\S](?!.* {2})[\s\S]*\S$"
+              [class.is-invalid]="
+                getFormControls(idx).faq_question.invalid &&
+                (getFormControls(idx).faq_question.dirty ||
+                  getFormControls(idx).faq_question.touched)
+              "
+              [class.is-valid]="
+                !getFormControls(idx).faq_question.invalid &&
+                (getFormControls(idx).faq_question.dirty ||
+                  getFormControls(idx).faq_question.touched)
+              "
+              type="text"
+              formControlName="faq_question"
+              class="form-control form-control-solid form-control-lg"
+            />
+            <div
+              *ngIf="
+                getFormControls(idx).faq_question.invalid &&
+                (getFormControls(idx).faq_question.dirty ||
+                  getFormControls(idx).faq_question.touched)
+              "
+            >
+              <div
+                *ngIf="getFormControls(idx).faq_question.errors.required"
+                class="invalid-feedback"
+              >
+                Please provide question
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group row" formGroupName="{{ idx }}">
+          <label for="" class="col-sm-3 col-form-label">Answer <span *ngIf="idx === 0" class="text-danger">*</span></label>
+          <div class="col-sm-9">
+            <textarea
+            pattern="^\S$|^\S[\s\S](?!.* {2})[\s\S]*\S$"
+              [class.is-invalid]="
+                getFormControls(idx).faq_answer.invalid &&
+                (getFormControls(idx).faq_answer.dirty ||
+                  getFormControls(idx).faq_answer.touched)
+              "
+              [class.is-valid]="
+                !getFormControls(idx).faq_answer.invalid &&
+                (getFormControls(idx).faq_answer.dirty ||
+                  getFormControls(idx).faq_answer.touched)
+              "
+              type="text"
+              formControlName="faq_answer"
+              class="form-control form-control-solid form-control-lg"
+              name=""
+              id=""
+              cols="30"
+              rows="10"
+              class="form-control form-control-solid form-control-lg"
+            ></textarea>
+            <div
+              *ngIf="
+                getFormControls(idx).faq_answer.invalid &&
+                (getFormControls(idx).faq_answer.dirty ||
+                  getFormControls(idx).faq_answer.touched)
+              "
+            >
+              <div
+                *ngIf="getFormControls(idx).faq_answer.errors.required"
+                class="invalid-feedback"
+              >
+                Please provide answer
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 d-flex justify-content-end mb-3">
+        <button
+          type="button"
+          class="btn btn-lg btn-light-primary mr-2"
+          [disabled]="faqsForm.status.toLowerCase() == 'invalid'"
+          (click)="addAnother()"
+        >
+          Add another FAQ
+        </button>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12 d-flex justify-content-between">
+        <button
+          type="button"
+          class="btn btn-lg btn-light-primary mr-2"
+          (click)="submit('back')"
+        >
+          Previous
+        </button>
+        <button
+          type="button"
+          class="btn btn-lg btn-primary"
+          [disabled]="faqsForm.invalid"
+          (click)="submit('done')"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

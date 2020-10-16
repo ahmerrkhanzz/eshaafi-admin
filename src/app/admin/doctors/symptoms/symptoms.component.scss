@@ -1,0 +1,78 @@
+@import "../../../../assets/scss/_variables.scss";
+
+.card {
+  &-header {
+    border: none;
+    display: flex;
+    align-items: center;
+    background: transparent;
+    justify-content: space-between;
+    h4 {
+      font-size: 1.275rem;
+      margin: 0;
+    }
+    &-actions {
+      display: flex;
+      .buttons {
+        // min-width: 25rem;
+        .dropdown-toggle:after {
+          display: none;
+        }
+        .dropdown-menu {
+          border: none;
+          box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+          .dropdown-item {
+            padding: 0.5rem 2rem;
+            font-size: 0.9rem;
+            box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+            &:hover {
+              background-color: $color-primary-light;
+              color: $color-primary;
+            }
+          }
+        }
+      }
+    }
+  }
+  ::ng-deep .pagination {
+    justify-content: flex-end;
+    margin: 1rem 0 0 0;
+    li {
+      margin: 0 0.15rem;
+      &:first-child,
+      &:last-child {
+        a {
+          background: $btn-primary-hover;
+          font-size: 1.2rem;
+          padding: 0.25rem;
+          font-weight: 400;
+          color: #fff;
+        }
+      }
+      .page-link {
+        background: transparent;
+        border: none;
+        color: $text-grey;
+        border-radius: 0.42rem;
+        padding: 0.5rem;
+        min-width: 2rem;
+        text-align: center;
+        height: 2rem;
+        transition: all 1s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &:hover {
+          background: $color-primary;
+          color: #fff;
+        }
+      }
+      &.active {
+        .page-link {
+          background: $color-primary;
+          color: #fff;
+        }
+      }
+    }
+  }
+}

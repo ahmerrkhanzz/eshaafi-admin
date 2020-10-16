@@ -1,0 +1,36 @@
+@import "../../../assets/scss/_variables.scss";
+.topbar {
+  // box-shadow: 0 10px 30px 0 rgba(82, 63, 105, 0.08);
+  background: transparent;
+  display: flex;
+  .navbar {
+    padding: 0.5rem 0rem;
+    &-brand {
+      height: auto;
+      width: 7rem;
+      display: flex;
+      img {
+        width: 100%;
+      }
+    }
+    &-collapse {
+      .nav-link {
+        color: $text-grey;
+        font-weight: 500;
+        transition: all 1.5s ease;
+        font-size: 1rem;
+        &:hover {
+          color: $color-secondary;
+        }
+      }
+      button {
+        font-size: 0.8rem;
+      }
+    }
+    .dropdown-menu {
+      &.show {
+        left: -4.5rem;
+      }
+    }
+  }
+}

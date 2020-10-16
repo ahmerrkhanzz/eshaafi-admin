@@ -1,0 +1,10 @@
+<div class="card">
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/images/loader.gif" alt="">
+  </div>
+  <app-custom-table
+    [tableConstructor]="tableConstructor"
+    (actionEmitter)="deleteEmitter($event)"
+    (editEmitter)="editEmitter($event)"
+  ></app-custom-table>
+</div>

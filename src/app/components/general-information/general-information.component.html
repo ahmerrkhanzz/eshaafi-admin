@@ -1,0 +1,411 @@
+<div class="general">
+  <form [formGroup]="generalInformationForm">
+    <div class="form-group d-flex justify-content-center mt-3">
+      <div class="image-input image-input-outline">
+        <div
+          class="image-input-wrapper"
+          style="background-image: url({{preview}})"
+        ></div>
+        <label
+          class="btn btn-xs btn-circle"
+          data-action="change"
+          data-toggle="tooltip"
+          title=""
+          data-original-title="Change avatar"
+        >
+          <i class="fa fa-pen icon-sm text-muted"></i>
+          <input
+            type="file"
+            accept=".png, .jpg, .jpeg"
+            (change)="handleFileInput($event)"
+          />
+          <input type="hidden" name="profile_avatar_remove" />
+        </label>
+        <span
+          class="btn btn-xs btn-circle btn-cancel-image"
+          data-action="cancel"
+          data-toggle="tooltip"
+          title=""
+          data-original-title="Cancel avatar"
+          (click)="cancelAvatar()"
+        >
+          <i class="fas fa-times icon-sm text-muted"></i>
+        </span>
+      </div>
+    </div>
+    <div
+      class="form-group d-flex justify-content-center align-items-center mt-4"
+    >
+      <div class="radio-list radio-list-linear">
+        <label class="radio mr-3" for="male"
+          >Hospital
+          <input
+            id="male"
+            type="radio"
+            value="male"
+            name="is_clinic"
+            formControlName="is_clinic"
+          />
+          <span class="checkmark"></span>
+        </label>
+        <label class="radio mr-3" for="female"
+          >Clinic
+          <input
+            type="radio"
+            id="female"
+            value="female"
+            name="is_clinic"
+            formControlName="is_clinic"
+          />
+          <span class="checkmark"></span>
+        </label>
+      </div>
+      <div
+        *ngIf="
+          generalInformationFormControls.is_clinic.invalid &&
+          (generalInformationFormControls.is_clinic.dirty ||
+            generalInformationFormControls.is_clinic.touched)
+        "
+      >
+        <div
+          *ngIf="generalInformationFormControls.is_clinic.errors.required"
+          class="invalid-feedback"
+        >
+          Please select
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >Name <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <input
+          [class.is-invalid]="
+            generalInformationFormControls.name.invalid &&
+            (generalInformationFormControls.name.dirty ||
+              generalInformationFormControls.name.touched)
+          "
+          [class.is-valid]="
+            !generalInformationFormControls.name.invalid &&
+            (generalInformationFormControls.name.dirty ||
+              generalInformationFormControls.name.touched)
+          "
+          (keydown)="textValidator($event)"
+          type="text"
+          maxlength="40"
+          minlength="5"
+          formControlName="name"
+          placeholder="Name"
+          class="form-control form-control-solid form-control-lg"
+        />
+        <div
+          *ngIf="
+            generalInformationFormControls.name.invalid &&
+            (generalInformationFormControls.name.dirty ||
+              generalInformationFormControls.name.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.name.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide name
+          </div>
+          <div
+            *ngIf="generalInformationFormControls.name.errors.minlength"
+            class="invalid-feedback-warning"
+          >
+            Minimum charactors length should be 5
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >Email <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <div class="input-group">
+          <input
+            [class.is-invalid]="
+              generalInformationForm.get('email').invalid &&
+              (generalInformationForm.get('email').touched ||
+                generalInformationForm.get('email').dirty)
+            "
+            [class.is-valid]="
+              !generalInformationForm.get('email').invalid &&
+              (generalInformationForm.get('email').touched ||
+                generalInformationForm.get('email').dirty)
+            "
+            type="text"
+            placeholder="Email"
+            formControlName="email"
+            class="form-control form-control-solid form-control-lg"
+          />
+          <div class="input-group-append">
+            <div class="input-group-text">@eshaafi.com</div>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            generalInformationFormControls.email.invalid &&
+            (generalInformationFormControls.email.dirty ||
+              generalInformationFormControls.email.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.email.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide email
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >Phone <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text">+92</div>
+          </div>
+          <input
+            [class.is-invalid]="
+              generalInformationFormControls.phone.invalid &&
+              (generalInformationFormControls.phone.dirty ||
+                generalInformationFormControls.phone.touched)
+            "
+            [class.is-valid]="
+              !generalInformationFormControls.phone.invalid &&
+              (generalInformationFormControls.phone.dirty ||
+                generalInformationFormControls.phone.touched)
+            "
+            type="text"
+            minlength="10"
+            maxlength="10"
+            placeholder="322 8268 648"
+            (keydown)="numericValidator($event)"
+            formControlName="phone"
+            class="form-control form-control-solid form-control-lg"
+          />
+        </div>
+        <div
+          *ngIf="
+            generalInformationFormControls.phone.invalid &&
+            (generalInformationFormControls.phone.dirty ||
+              generalInformationFormControls.phone.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.phone.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide phone number
+          </div>
+          <div
+            *ngIf="generalInformationFormControls.phone.errors.minlength"
+            class="invalid-feedback-warning"
+          >
+            Invalid phone number
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >Google Map Link <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <input
+          [class.is-invalid]="
+            generalInformationFormControls.google_map.invalid &&
+            (generalInformationFormControls.google_map.dirty ||
+              generalInformationFormControls.google_map.touched)
+          "
+          [class.is-valid]="
+            !generalInformationFormControls.google_map.invalid &&
+            (generalInformationFormControls.google_map.dirty ||
+              generalInformationFormControls.google_map.touched)
+          "
+          (keydown)="textValidator($event)"
+          type="text"
+          name="google_map"
+          placeholder="Google map url"
+          maxlength="25"
+          formControlName="google_map"
+          class="form-control form-control-solid form-control-lg"
+        />
+        <div
+          *ngIf="
+            generalInformationFormControls.google_map.invalid &&
+            (generalInformationFormControls.google_map.dirty ||
+              generalInformationFormControls.google_map.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.google_map.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide google map link
+          </div>
+          <div
+            *ngIf="generalInformationFormControls.google_map.errors.minlength"
+            class="invalid-feedback-warning"
+          >
+            Minimum length should be 5
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >No. of Beds <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <input
+          [class.is-invalid]="
+            generalInformationFormControls.beds.invalid &&
+            (generalInformationFormControls.beds.dirty ||
+              generalInformationFormControls.beds.touched)
+          "
+          [class.is-valid]="
+            !generalInformationFormControls.beds.invalid &&
+            (generalInformationFormControls.beds.dirty ||
+              generalInformationFormControls.beds.touched)
+          "
+          (keydown)="numericValidator($event)"
+          placeholder="Number of beds"
+          type="text"
+          name="beds"
+          maxlength="25"
+          formControlName="beds"
+          class="form-control form-control-solid form-control-lg"
+        />
+        <div
+          *ngIf="
+            generalInformationFormControls.beds.invalid &&
+            (generalInformationFormControls.beds.dirty ||
+              generalInformationFormControls.beds.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.beds.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide Beds count
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >Address <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <input
+          [class.is-invalid]="
+            generalInformationFormControls.address.invalid &&
+            (generalInformationFormControls.address.dirty ||
+              generalInformationFormControls.address.touched)
+          "
+          [class.is-valid]="
+            !generalInformationFormControls.address.invalid &&
+            (generalInformationFormControls.address.dirty ||
+              generalInformationFormControls.address.touched)
+          "
+          type="text"
+          placeholder="Address"
+          maxlength="70"
+          formControlName="address"
+          class="form-control form-control-solid form-control-lg"
+        />
+        <div
+          *ngIf="
+            generalInformationFormControls.address.invalid &&
+            (generalInformationFormControls.address.dirty ||
+              generalInformationFormControls.address.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.address.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide address
+          </div>
+          <div
+            *ngIf="generalInformationFormControls.address.errors.minlength"
+            class="invalid-feedback-warning"
+          >
+            Minimum charactors length should be 10
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="" class="col-sm-3 col-form-label"
+        >About <span class="text-danger">*</span></label
+      >
+      <div class="col-sm-9">
+        <textarea
+          [class.is-invalid]="
+            generalInformationFormControls.summary.invalid &&
+            (generalInformationFormControls.summary.dirty ||
+              generalInformationFormControls.summary.touched)
+          "
+          [class.is-valid]="
+            !generalInformationFormControls.summary.invalid &&
+            (generalInformationFormControls.summary.dirty ||
+              generalInformationFormControls.summary.touched)
+          "
+          name=""
+          id=""
+          placeholder="About..."
+          cols="30"
+          rows="10"
+          formControlName="summary"
+          class="form-control form-control-solid form-control-lg"
+        ></textarea>
+        <div
+          *ngIf="
+            generalInformationFormControls.summary.invalid &&
+            (generalInformationFormControls.summary.dirty ||
+              generalInformationFormControls.summary.touched)
+          "
+        >
+          <div
+            *ngIf="generalInformationFormControls.summary.errors.required"
+            class="invalid-feedback"
+          >
+            Please provide summary
+          </div>
+          <div
+            *ngIf="generalInformationFormControls.summary.errors.minlength"
+            class="invalid-feedback-warning"
+          >
+            Minimum charactors length should be 20
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-12">
+        <div class="d-flex justify-content-end">
+          <button
+            type="button"
+            [disabled]="
+              generalInformationForm.status.toLowerCase() === 'invalid'
+            "
+            (click)="submit('next')"
+            class="btn btn-lg btn-primary width-7"
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

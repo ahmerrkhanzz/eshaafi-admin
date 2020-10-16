@@ -1,0 +1,484 @@
+<div class="card">
+  <div class="loading" *ngIf="loading">
+    <img src="../../../../assets/images/loader.gif" alt="" />
+  </div>
+  <div class="card-header">
+    <div class="card-title">
+      <h3 class="card-label">
+        {{ selectedPatient ? "Update" : "Add" }} Patient <i class="mr-2"></i>
+      </h3>
+    </div>
+    <div class="card-toolbar"></div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="signUpForm">
+      <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3 col-form-label"
+              >Full Name <span class="text-danger">*</span></label
+            >
+            <div class="col-sm-9">
+              <input
+                [class.is-invalid]="
+                  signUpFormControls.name.invalid &&
+                  (signUpFormControls.name.dirty ||
+                    signUpFormControls.name.touched)
+                "
+                [class.is-valid]="
+                  !signUpFormControls.name.invalid &&
+                  (signUpFormControls.name.dirty ||
+                    signUpFormControls.name.touched)
+                "
+                (keydown)="textValidator($event)"
+                placeholder="Full Name"
+                type="text"
+                pattern="^\S$|^\S[\s\S](?!.* {2})[\s\S]*\S$"
+                name="name"
+                formControlName="name"
+                maxlength="25"
+                minlength="5"
+                class="form-control form-control-solid form-control-lg"
+              />
+              <div
+                *ngIf="
+                  signUpFormControls.name.invalid &&
+                  (signUpFormControls.name.dirty ||
+                    signUpFormControls.name.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.name.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide name
+                </div>
+                <div
+                  *ngIf="signUpFormControls.name.errors.minlength"
+                  class="invalid-feedback-warning"
+                >
+                  Minimum charactors length should be 5
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Email</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">@</div>
+                </div>
+                <input
+                  placeholder="john@eshaafi.com"
+                  [class.is-invalid]="
+                    signUpFormControls.email.invalid &&
+                    signUpFormControls.email.value &&
+                    (signUpFormControls.email.touched ||
+                      signUpFormControls.email.dirty)
+                  "
+                  [class.is-valid]="
+                    signUpFormControls.email.valid &&
+                    signUpFormControls.email.value &&
+                    (signUpFormControls.email.touched ||
+                      signUpFormControls.email.dirty)
+                  "
+                  type="text"
+                  formControlName="email"
+                  class="form-control form-control-solid form-control-lg"
+                />
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.email.invalid &&
+                  (signUpFormControls.email.dirty ||
+                    signUpFormControls.email.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.email.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide email
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row">
+            <label for="" class="col-sm-3 col-form-label"
+              >Phone <span class="text-danger">*</span></label
+            >
+            <div class="col-sm-9">
+              <small class="text-primary mb-1">Please provide number in this format '3XX XXXX XXX'</small>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">+92</div>
+                </div>
+                <input
+                  [class.is-invalid]="
+                    signUpFormControls.phone.invalid &&
+                    (signUpFormControls.phone.dirty ||
+                      signUpFormControls.phone.touched)
+                  "
+                  [class.is-valid]="
+                    !signUpFormControls.phone.invalid &&
+                    (signUpFormControls.phone.dirty ||
+                      signUpFormControls.phone.touched)
+                  "
+                  type="text"
+                  minlength="10"
+                  maxlength="10"
+                  placeholder="322 6468 648"
+                  (keydown)="numericValidator($event)"
+                  formControlName="phone"
+                  class="form-control form-control-solid form-control-lg"
+                />
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.phone.invalid &&
+                  (signUpFormControls.phone.dirty ||
+                    signUpFormControls.phone.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.phone.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide phone number
+                </div>
+                <div
+                  *ngIf="signUpFormControls.phone.errors.minlength"
+                  class="invalid-feedback-warning"
+                >
+                  Invalid phone number
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3 col-form-label">Date of Birth</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <img
+                      src="../../../../../assets/icons/calendar.svg"
+                      alt=""
+                    />
+                  </div>
+                </div>
+                <input
+                  [class.is-invalid]="
+                    signUpFormControls.dob.invalid &&
+                    signUpFormControls.dob.value &&
+                    signUpFormControls.dob.value &&
+                    (signUpFormControls.dob.dirty ||
+                      signUpFormControls.dob.touched)
+                  "
+                  [class.is-valid]="
+                    signUpFormControls.dob.valid &&
+                    signUpFormControls.dob.value &&
+                    signUpFormControls.dob.value &&
+                    (signUpFormControls.dob.dirty ||
+                      signUpFormControls.dob.touched)
+                  "
+                  formControlName="dob"
+                  placeholder="Date of birth"
+                  class="form-control form-control-solid form-control-lg"
+                  name="dp"
+                  ngbDatepicker
+                  [minDate]="minDate"
+                  [maxDate]="maxDate"
+                  #dob="ngbDatepicker"
+                  (click)="dob.toggle()"
+                  readonly
+                />
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.dob.invalid &&
+                  (signUpFormControls.dob.dirty ||
+                    signUpFormControls.dob.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.dob.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide start date
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3">Blood Group</label>
+            <div class="col-sm-9">
+              <select
+                name=""
+                formControlName="blood_group"
+                [class.is-invalid]="
+                  signUpFormControls.blood_group.invalid &&
+                  signUpFormControls.blood_group.value &&
+                  (signUpFormControls.blood_group.dirty ||
+                    signUpFormControls.blood_group.touched)
+                "
+                [class.is-valid]="
+                  signUpFormControls.blood_group.valid &&
+                  signUpFormControls.blood_group.value &&
+                  (signUpFormControls.blood_group.dirty ||
+                    signUpFormControls.blood_group.touched)
+                "
+                class="custom-select form-control form-control-solid form-control-lg"
+              >
+                <option selected value="">Blood Group</option>
+                <option>A+</option>
+                <option>A-</option>
+                <option>B+</option>
+                <option>B-</option>
+                <option>AB+</option>
+                <option>AB-</option>
+                <option>O+</option>
+                <option>O-</option>
+              </select>
+              <div
+                *ngIf="
+                  signUpFormControls.blood_group.invalid &&
+                  (signUpFormControls.blood_group.dirty ||
+                    signUpFormControls.blood_group.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.blood_group.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide bloodGroup
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3">Weight</label>
+            <div class="col-sm-9">
+              <div class="input-group">
+                <input
+                  [class.is-invalid]="
+                    signUpFormControls.weight.invalid &&
+                    signUpFormControls.weight.value &&
+                    (signUpFormControls.weight.dirty ||
+                      signUpFormControls.weight.touched)
+                  "
+                  [class.is-valid]="
+                    !signUpFormControls.weight.invalid &&
+                    signUpFormControls.weight.value &&
+                    (signUpFormControls.weight.dirty ||
+                      signUpFormControls.weight.touched)
+                  "
+                  (keydown)="numericValidator($event)"
+                  maxlength="3"
+                  minlength="2"
+                  type="text"
+                  formControlName="weight"
+                  class="form-control form-control-solid form-control-lg"
+                />
+                <div class="input-group-append">
+                  <span class="input-group-text">
+                    Weight (kg.)
+                  </span>
+                </div>
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.weight.invalid &&
+                  (signUpFormControls.weight.dirty ||
+                    signUpFormControls.weight.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.weight.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please provide weight
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3">Height</label>
+            <div class="col-sm-9">
+              <div class="row" formGroupName="height">
+                <div class="col-6">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01"
+                        >Height(ft)</label
+                      >
+                    </div>
+                    <select
+                      name="heightFeet"
+                      formControlName="feet"
+                      class="custom-select form-control form-control-solid form-control-lg"
+                    >
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <label class="input-group-text" for="inputGroupSelect01"
+                        >Height(in)</label
+                      >
+                    </div>
+                    <select
+                      [attr.disabled]="
+                        signUpForm.get('height').get('feet').value ? null : ''
+                      "
+                      name="heightInches"
+                      formControlName="inches"
+                      class="custom-select form-control form-control-solid form-control-lg"
+                    >
+                      <option>0</option>
+                      <option>1</option>
+                      <option>2</option>
+                      <option>3</option>
+                      <option>4</option>
+                      <option>5</option>
+                      <option>6</option>
+                      <option>7</option>
+                      <option>8</option>
+                      <option>9</option>
+                      <option>10</option>
+                      <option>11</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3">Gender</label>
+            <div class="col-sm-9">
+              <div class="radio-list radio-list-linear">
+                <label class="radio mr-3" for="male"
+                  >Male
+                  <input
+                    id="male"
+                    type="radio"
+                    value="male"
+                    name="gender"
+                    formControlName="gender"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio mr-3" for="female"
+                  >Female
+                  <input
+                    type="radio"
+                    id="female"
+                    value="female"
+                    name="gender"
+                    formControlName="gender"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio" for="other"
+                  >Not Specified
+                  <input
+                    type="radio"
+                    id="other"
+                    value="other"
+                    name="gender"
+                    formControlName="gender"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.gender.invalid &&
+                  (signUpFormControls.gender.dirty ||
+                    signUpFormControls.gender.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.gender.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please select gender
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group row mb-4">
+            <label for="" class="col-sm-3">Maritial Status</label>
+            <div class="col-sm-9">
+              <div class="radio-list radio-list-linear">
+                <label class="radio mr-3" for="married"
+                  >Married
+                  <input
+                    id="married"
+                    type="radio"
+                    value="married"
+                    name="marital_status"
+                    formControlName="marital_status"
+                    (change)="changeGender($event)"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+                <label class="radio mr-3" for="unmarried"
+                  >Unmarried
+                  <input
+                    type="radio"
+                    id="unmarried"
+                    value="unmarried"
+                    name="marital_status"
+                    formControlName="marital_status"
+                    (change)="changeGender($event)"
+                  />
+                  <span class="checkmark"></span>
+                </label>
+              </div>
+              <div
+                *ngIf="
+                  signUpFormControls.marital_status.invalid &&
+                  (signUpFormControls.marital_status.dirty ||
+                    signUpFormControls.marital_status.touched)
+                "
+              >
+                <div
+                  *ngIf="signUpFormControls.marital_status.errors.required"
+                  class="invalid-feedback"
+                >
+                  Please select maritial status
+                </div>
+              </div>
+            </div>
+          </div>
+         <div class="d-flex justify-content-center mb-3">
+            <button
+            type="button"
+            class="btn btn-light-primary mt-4"
+            (click)="signUp()"
+            [disabled]="signUpForm.status.toLowerCase() === 'invalid'"
+          >
+            {{ selectedPatient ? "Update" : "Sign up" }}
+          </button>
+          <button
+            type="button"
+            class="btn btn-light-default mt-4"
+            [routerLink]="['/admin/patients']"
+          >
+            Cancel
+          </button>
+         </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+    </form>
+  </div>
+</div>

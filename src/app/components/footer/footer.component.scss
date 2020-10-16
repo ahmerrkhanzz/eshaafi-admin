@@ -1,0 +1,65 @@
+@import "../../../assets/scss/_variables.scss";
+
+footer {
+  color: $text-muted;
+  background-color: #04466f;
+  h6 {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 400;
+  }
+  .list-group {
+    &-item {
+      background-color: transparent;
+      border: none;
+      padding: 0.1rem 0;
+      a {
+        color: $text-muted;
+        transition: all 1s ease;
+        font-weight: 300;
+        &:hover {
+          color: #fff;
+          text-decoration: none;
+        }
+      }
+    }
+  }
+  .icons {
+    font-size: 2rem;
+    a {
+      transition: all 1s ease;
+      color: $text-muted;
+      &:hover {
+        color: $color-primary;
+      }
+    }
+  }
+  .parallex {
+    padding: 3rem 0;
+    /* The image used */
+    background-image: url("../../../assets/images/bg-footer.png");
+
+    /* Full height */
+    height: 100%;
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $color-secondary;
+  }
+  .footer-links{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.3rem;
+    a{
+      color: $text-muted;
+      transition: all 1s ease;
+      &:hover{
+        text-decoration: none;
+        color: #fff;
+      }
+    }
+  }
+}

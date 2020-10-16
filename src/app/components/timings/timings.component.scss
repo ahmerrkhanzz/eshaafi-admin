@@ -1,0 +1,105 @@
+@import "../../../assets/scss/_variables.scss";
+
+.doctor {
+  &-heading{
+    h3{
+      text-align: center;
+      color: #fff;
+    }
+  }
+  ::ng-deep .nav {
+    &-pills {
+      justify-content: center !important;
+    }
+    &-link{
+      border: none;
+    }
+    &-tabs{
+      border: none;
+      justify-content: center;
+    }
+    &-item {
+      a {
+        color: #fff;
+        transition: all 0.5s ease;
+        display: inline-block;
+        text-decoration: none;
+        &.active {
+          background-color: transparent;
+          border-color: transparent;
+          &::after {
+            content: "";
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s;
+          }
+        }
+        &::after {
+          content: "";
+          display: block;
+          width: 0;
+          height: 2px;
+          background: #fff;
+          transition: width 0.3s;
+        }
+        &:hover {
+          border: none;
+          &::after {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+  .card {
+    margin-bottom: 4rem;
+    &-header {
+      min-height: 4.3rem;
+      border: bottom 1px solid $border-grey;
+      display: flex;
+      align-items: center;
+      background: transparent;
+      justify-content: space-between;
+      .card-title {
+        margin: 0;
+        h3 {
+          margin: 0;
+          font-size: 1.275rem;
+        }
+      }
+      h4 {
+        font-size: 1.275rem;
+        margin: 0;
+      }
+      &-actions {
+        display: flex;
+        .buttons {
+          // min-width: 25rem;
+          .dropdown-menu {
+            padding: 0;
+            border: none;
+            box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+            .dropdown-item {
+              padding: 0.5rem 2rem;
+              box-shadow: 0 0 30px 0 rgba(82, 63, 105, 0.05);
+              border-radius: 0.42rem;
+              &:hover {
+                background-color: $color-primary-light;
+                color: $color-primary;
+              }
+            }
+          }
+        }
+      }
+    }
+    &-toolbar {
+      a:hover {
+        .st0 {
+          fill: #fff;
+        }
+      }
+    }
+  }
+}
